@@ -1,11 +1,28 @@
 {
-  "name": "@simon-robertson-online/reactive",
-  "version": "0.0.0",
-  "description": "coming soon",
-  "repository": "https://github.com/simon-robertson-shift/reactive.git",
-  "contributors": [
-    {
-      "name": "Simon Robertson"
+    "name": "@simon-robertson-online/reactive",
+    "version": "0.0.1",
+    "description": "",
+    "repository": "https://github.com/simon-robertson-shift/reactive.git",
+    "contributors": [
+        {
+            "name": "Simon Robertson"
+        }
+    ],
+    "main": "index.js",
+    "files": [
+        "/index.d.ts",
+        "/index.js",
+        "/types.d.ts",
+        "/types.js"
+    ],
+    "scripts": {
+        "build": "tsc"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^5.60.1",
+        "@typescript-eslint/parser": "^5.60.1",
+        "eslint": "^8.43.0",
+        "prettier": "^2.8.8",
+        "typescript": "^5.1.6"
     }
-  ]
 }
