@@ -1,38 +1,36 @@
-export type Reactive<A extends ReactiveActions, S extends ReactiveState> = {
-    readonly connect: ReactiveConnector<S>
-    readonly disconnect: ReactiveConnector<S>
-    readonly getActions: ReactiveActionsProvider<A>
-    readonly getState: ReactiveStateProvider<S>
+export type Store<A extends StoreActions, S extends StoreState> = {
+    readonly connect: StoreConnector<S>
+    readonly disconnect: StoreConnector<S>
+    readonly getActions: StoreActionsProvider<A>
+    readonly getState: StoreStateProvider<S>
 }
 
-export type ReactiveActions = {
+export type StoreActions = {
     readonly [key: string]: (...args: never[]) => void
 }
 
-export type ReactiveActionsFactory<A extends ReactiveActions, S extends ReactiveState> = (
-    input: ReactiveActionsInput<A, S>
-) => A
+export type StoreActionsFactory<A extends StoreActions, S extends StoreState> = (input: StoreActionsInput<A, S>) => A
 
-export type ReactiveActionsInput<A extends ReactiveActions, S extends ReactiveState> = {
-    readonly getActions: ReactiveActionsProvider<A>
-    readonly getState: ReactiveStateProvider<S>
-    readonly updateState: ReactiveStateUpdater<S>
+export type StoreActionsInput<A extends StoreActions, S extends StoreState> = {
+    readonly getActions: StoreActionsProvider<A>
+    readonly getState: StoreStateProvider<S>
+    readonly updateState: StoreStateUpdater<S>
 }
 
-export type ReactiveActionsProvider<A extends ReactiveActions> = () => A
+export type StoreActionsProvider<A extends StoreActions> = () => A
 
-export type ReactiveConnector<S extends ReactiveState> = (receiver: ReactiveStateReceiver<S>) => void
+export type StoreConnector<S extends StoreState> = (receiver: StoreStateReceiver<S>) => void
 
-export type ReactiveState = {
+export type StoreState = {
     readonly [key: string]: unknown
 }
 
-export type ReactiveStateFactory<S extends ReactiveState> = () => S
+export type StoreStateFactory<S extends StoreState> = () => S
 
-export type ReactiveStateProvider<S extends ReactiveState> = () => S
+export type StoreStateProvider<S extends StoreState> = () => S
 
-export type ReactiveStateReceiver<S extends ReactiveState> = (state: S) => void
+export type StoreStateReceiver<S extends StoreState> = (state: S) => void
 
-export type ReactiveStateSelector<S extends ReactiveState, T> = (state: S) => T
+export type StoreStateSelector<S extends StoreState, T> = (state: S) => T
 
-export type ReactiveStateUpdater<S extends ReactiveState> = (state: Partial<S>) => void
+export type StoreStateUpdater<S extends StoreState> = (state: Partial<S>) => void

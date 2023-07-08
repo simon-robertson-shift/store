@@ -1,27 +1,27 @@
 import type {
-    Reactive,
-    ReactiveActions,
-    ReactiveActionsFactory,
-    ReactiveActionsProvider,
-    ReactiveConnector,
-    ReactiveState,
-    ReactiveStateFactory,
-    ReactiveStateProvider,
-    ReactiveStateReceiver,
-    ReactiveStateUpdater
+    Store,
+    StoreActions,
+    StoreActionsFactory,
+    StoreActionsProvider,
+    StoreConnector,
+    StoreState,
+    StoreStateFactory,
+    StoreStateProvider,
+    StoreStateReceiver,
+    StoreStateUpdater
 } from './types'
 
 /** */
-export const createReactiveStore = <A extends ReactiveActions, S extends ReactiveState>(
-    createActions: ReactiveActionsFactory<A, S>,
-    createState: ReactiveStateFactory<S>
-): Reactive<A, S> => {
+export const createStore = <A extends StoreActions, S extends StoreState>(
+    createActions: StoreActionsFactory<A, S>,
+    createState: StoreStateFactory<S>
+): Store<A, S> => {
     let currentActions: A | undefined
     let currentState: S | undefined
 
-    const stateReceivers = new Set<ReactiveStateReceiver<S>>()
+    const stateReceivers = new Set<StoreStateReceiver<S>>()
 
-    const connect: ReactiveConnector<S> = (receiver) => {
+    const connect: StoreConnector<S> = (receiver) => {
         stateReceivers.add(receiver)
 
         if (currentState !== undefined) {
@@ -29,11 +29,11 @@ export const createReactiveStore = <A extends ReactiveActions, S extends Reactiv
         }
     }
 
-    const disconnect: ReactiveConnector<S> = (receiver) => {
+    const disconnect: StoreConnector<S> = (receiver) => {
         stateReceivers.delete(receiver)
     }
 
-    const getActions: ReactiveActionsProvider<A> = () => {
+    const getActions: StoreActionsProvider<A> = () => {
         if (currentActions === undefined) {
             currentActions = createActions({
                 getActions,
@@ -45,7 +45,7 @@ export const createReactiveStore = <A extends ReactiveActions, S extends Reactiv
         return currentActions
     }
 
-    const getState: ReactiveStateProvider<S> = () => {
+    const getState: StoreStateProvider<S> = () => {
         if (currentState === undefined) {
             currentState = createState()
         }
@@ -53,7 +53,7 @@ export const createReactiveStore = <A extends ReactiveActions, S extends Reactiv
         return currentState
     }
 
-    const updateState: ReactiveStateUpdater<S> = (changes) => {
+    const updateState: StoreStateUpdater<S> = (changes) => {
         const current = getState()
 
         currentState = {
