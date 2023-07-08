@@ -1,8 +1,8 @@
 {
-    "name": "@nomemo/reactive",
+    "name": "@nomemo/store",
     "version": "0.0.4",
     "description": "",
-    "repository": "https://github.com/simon-robertson-shift/reactive.git",
+    "repository": "https://github.com/simon-robertson-shift/store.git",
     "contributors": [
         {
             "name": "Simon Robertson"
