@@ -10,4 +10,4 @@ For now, take a look at [reactive-react-demo](https://github.com/simon-robertson
 
 ### installation
 
-`npm i @simon-robertson-online/reactive`
+`npm i @nomemo/reactive`
